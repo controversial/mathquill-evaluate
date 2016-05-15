@@ -1,0 +1,13 @@
+#container {
+  display: flex;
+  align-items: stretch;
+}
+#math-field {
+  flex-grow: 1;
+}
+#evalButton {
+  border: 1px solid gray;
+  height: 24px;
+  background-color: #fff;
+  border-radius: 0;
+}
