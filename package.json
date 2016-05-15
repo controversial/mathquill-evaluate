@@ -1,0 +1,27 @@
+{
+  "name": "mathquill-evaluate",
+  "version": "0.1.0",
+  "description": "Evaluate MathQuill expressions through WolframAlpha's API",
+  "scripts": {
+    "build": "echo \"Error: build not yet implemented\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/The-Penultimate-Defenestrator/mathquill-evaluate"
+  },
+  "keywords": [
+    "math",
+    "mathquill",
+    "evaluate",
+    "evaluation",
+    "wolframalpha",
+    "wolfram",
+    "alpha"
+  ],
+  "author": "Luke Deen Taylor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/The-Penultimate-Defenestrator/mathquill-evaluate/issues"
+  },
+  "homepage": "https://github.com/The-Penultimate-Defenestrator/mathquill-evaluate"
+}
