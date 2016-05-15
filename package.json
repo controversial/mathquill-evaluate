@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/The-Penultimate-Defenestrator/mathquill-evaluate/issues"
   },
-  "homepage": "https://github.com/The-Penultimate-Defenestrator/mathquill-evaluate"
+  "homepage": "https://github.com/The-Penultimate-Defenestrator/mathquill-evaluate",
+  "devDependencies": {
+    "uglify-js": "2.x"
+  }
 }
