@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Evaluate MathQuill expressions through WolframAlpha's API",
   "scripts": {
-    "build": "/bin/bash build.sh"
+    "build": "/bin/sh build.sh"
   },
   "repository": {
     "type": "git",

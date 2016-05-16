@@ -1,7 +1,7 @@
 # Allow accessing npm executables
 PATH=$(npm bin):$PATH
 
-echo -n "Building... "
+printf "Building... "
 
 # Create build folder
 rm -rf build # Remove any old copies
