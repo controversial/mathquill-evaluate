@@ -13,3 +13,7 @@ $(document).ready(function() {
   mathfield = mq.MathField(input, { handlers: {edit: onEdit} } );
 
 });
+
+$("evalButton").click(function() {
+  
+});
