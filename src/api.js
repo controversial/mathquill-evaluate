@@ -21,7 +21,7 @@ function xmlParse(data) {
 // API key. endpoint should point to a local, running copy of `request.php` in
 // order to get around same-origin.
 function getXMLResult(endpoint, query, callback, key) {
-  var url = endpoint + "?input=" + query + "&appid=" + key;
+  var url = endpoint + "?input=" + encodeURIComponent(query) + "&appid=" + key;
   requestPage(url, function(data) {
     callback(xmlParse(data));
   });
