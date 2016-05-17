@@ -1,4 +1,6 @@
-//Make an asynchronous GET request and pass the recieved data to the callback
+// api.js - generic functions for interacting with an XML API.
+
+// Make an asynchronous GET request and pass the received data to the callback
 function requestPage(url, callback) {
   onSuccess = callback || function(){};
   var xhttp = new XMLHttpRequest();
@@ -17,11 +19,8 @@ function xmlParse(data) {
   return p.parseFromString(data, "text/xml");
 }
 
-// Make a WolframAlpha API call given the path to request.php, a query, and an
-// API key. endpoint should point to a local, running copy of `request.php` in
-// order to get around same-origin.
-function getXMLResult(endpoint, query, callback, key) {
-  var url = endpoint + "?input=" + encodeURIComponent(query) + "&appid=" + key;
+// Make an asynchronous GET request and pass the XML as a DOM object to the callback
+function requestXml(url, callback) {
   requestPage(url, function(data) {
     callback(xmlParse(data));
   });
