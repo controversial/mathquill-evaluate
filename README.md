@@ -10,10 +10,10 @@ file or the `build/mathquill-evaluate.min.js` file in your project.
 To evaluate the contents of a `MathField`, simply use
 
 ```javascript
-evaluate(my_mathfield, options)
+evaluate(my_mathfield, options);
 ```
 
-which will return either a numerical answer, if available.
+which will return a numerical answer, if available.
 
 ## Building
 To build, navigate to the project root and first run `npm install`, then
