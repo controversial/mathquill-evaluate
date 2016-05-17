@@ -12,3 +12,29 @@ function getWAResult(endpoint, query, key, callback) {
     callback(xmlParse(data));
   });
 }
+
+
+// RESPONSE PARSING FUNCTIONS
+
+// Get an object representing all response "pods" given a Wolfram|Alpha API XML
+// response. Pairs a pod's title with an object representing its id and subpods
+// Subpods are represented as plaintext.
+function getPods(xml) {
+  var pods = xml.getElementsByTagName("pod");
+  var out = {};
+
+  var pod, subpods; // Vars used in loop
+  for (var i = 0; i < pods.length; i++) {
+    pod = pods[i];
+    out[pod.getAttribute("title")] = {
+      "id": pod.id,
+      "subpods": [/* Subpods will go here */],
+    };
+    subpod_texts = pod.getElementsByTagName("plaintext");
+
+    for (var s=0; s < subpod_texts.length; s++) {
+      out[pod.getAttribute("title")].subpods.push(subpod_texts[s].textContent);
+    }
+  }
+  return out;
+}
