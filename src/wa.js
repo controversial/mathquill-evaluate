@@ -21,19 +21,27 @@ function getWAResult(endpoint, query, key, callback) {
 // Subpods are represented as plaintext.
 function getPods(xml) {
   var pods = xml.getElementsByTagName("pod");
-  var out = {};
+  var out = {}; // Will be returned
 
+  // Iterate through pods
   var pod, subpods; // Vars used in loop
   for (var i = 0; i < pods.length; i++) {
     pod = pods[i];
+    // Add this pod to the dict
     out[pod.id] = {
-      "title": pod.getAttribute("title"),
       "subpods": [/* Subpods will go here */],
+      "attributes": {}
     };
+    // Build the list of subpods
     subpod_texts = pod.getElementsByTagName("plaintext");
-
     for (var s=0; s < subpod_texts.length; s++) {
       out[pod.id].subpods.push(subpod_texts[s].textContent);
+    }
+    // Include all other attributes
+    var attr;
+    for (s = 0; s < pod.attributes.length; s++) {
+      attr = pod.attributes[s];
+      out[pod.id].attributes[attr.name] = attr.value;
     }
   }
   return out;
