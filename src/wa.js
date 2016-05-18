@@ -26,14 +26,14 @@ function getPods(xml) {
   var pod, subpods; // Vars used in loop
   for (var i = 0; i < pods.length; i++) {
     pod = pods[i];
-    out[pod.getAttribute("title")] = {
-      "id": pod.id,
+    out[pod.id] = {
+      "title": pod.getAttribute("title"),
       "subpods": [/* Subpods will go here */],
     };
     subpod_texts = pod.getElementsByTagName("plaintext");
 
     for (var s=0; s < subpod_texts.length; s++) {
-      out[pod.getAttribute("title")].subpods.push(subpod_texts[s].textContent);
+      out[pod.id].subpods.push(subpod_texts[s].textContent);
     }
   }
   return out;
