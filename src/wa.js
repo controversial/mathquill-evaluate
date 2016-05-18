@@ -16,6 +16,27 @@ function getWAResult(endpoint, query, key, callback) {
 
 // RESPONSE PARSING FUNCTIONS
 
+// Convert XML for a pod to a JSON representation
+function pod2json(pod) {
+  var out = { // Will be returned
+    "subpods": [/* Subpods will go here later */],
+    "attributes": {}
+  };
+  // Build the list of subpods
+  var subpod_texts = pod.getElementsByTagName("plaintext");
+  for (var s=0; s < subpod_texts.length; s++) {
+    out.subpods.push(subpod_texts[s].textContent);
+  }
+  // Include all other attributes
+  var attr;
+  for (s = 0; s < pod.attributes.length; s++) {
+    attr = pod.attributes[s];
+    out.attributes[attr.name] = attr.value;
+  }
+
+  return out;
+}
+
 // Get an object representing all response "pods" given a Wolfram|Alpha API XML
 // response. Pairs a pod's title with an object representing its id and subpods
 // Subpods are represented as plaintext.
@@ -28,21 +49,13 @@ function getPods(xml) {
   for (var i = 0; i < pods.length; i++) {
     pod = pods[i];
     // Add this pod to the dict
-    out[pod.id] = {
-      "subpods": [/* Subpods will go here */],
-      "attributes": {}
-    };
-    // Build the list of subpods
-    subpod_texts = pod.getElementsByTagName("plaintext");
-    for (var s=0; s < subpod_texts.length; s++) {
-      out[pod.id].subpods.push(subpod_texts[s].textContent);
-    }
-    // Include all other attributes
-    var attr;
-    for (s = 0; s < pod.attributes.length; s++) {
-      attr = pod.attributes[s];
-      out[pod.id].attributes[attr.name] = attr.value;
-    }
+    out[pod.id] = pod2json(pod);
   }
   return out;
+}
+
+// Get the primary pod from XML
+function getPrimaryPod(xml) {
+  var primaryPod = xml.querySelector("[primary=true]");
+  return pod2json(primaryPod);
 }
