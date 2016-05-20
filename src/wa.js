@@ -82,3 +82,10 @@ function getPrimaryPod(xml) {
   }
   return pod2json(primaryPod);
 }
+
+// Get plaintext for the primary pod and TODO: try to parse into a readable format
+function getResult(xml) {
+  var primarypod = getPrimaryPod(xml);
+  var text = primarypod.subpods[0];
+  return text;
+}
