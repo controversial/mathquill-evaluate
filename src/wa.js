@@ -7,6 +7,9 @@
 // API key. endpoint should point to a local, running copy of `request.php` in
 // order to get around same-origin.
 function getWAResult(endpoint, params, callback) {
+  // Make some assumptions if data is missing
+  if (params.format === undefined) {params.format = "plaintext";} // Only return plaintext results
+  if (params.scanner === undefined) {params.scanner = "Numeric,Reduce,Simplificiation";} // Only return math stuff
   var url = constructParams(endpoint, params);
   requestPage(url, function(data) {
     callback(xmlParse(data));
