@@ -61,12 +61,10 @@ function getPods(xml) {
 // try to return the more parseable of the two.
 function getPrimaryPod(xml) {
   var primaryPods = xml.querySelectorAll("[primary=true]");
-  console.log(primaryPods);
   var primaryPod;
   if (primaryPods.length === 1) {
     primaryPod = primaryPods[0];
   } else {
-    console.log("sort");
     // Attempt to resolve multiple "primary pods" by specifying scanner precedence
     var pods = Array.prototype.slice.call(primaryPods);
 
@@ -83,7 +81,7 @@ function getPrimaryPod(xml) {
   return pod2json(primaryPod);
 }
 
-// Get plaintext for the primary pod and TODO: try to parse into a readable format
+// Get plaintext for the primary pod and TODO: try to parse into a good format
 function getResult(xml) {
   var primarypod = getPrimaryPod(xml);
   var text = primarypod.subpods[0];
