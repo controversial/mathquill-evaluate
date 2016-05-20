@@ -7,7 +7,7 @@ function constructParams(baseURL, params) {
   var values = [];
   for (var i=0; i<keys.length; i++) {
     var k = keys[i];
-    values.push(k+"="+params[k]);
+    values.push(encodeURIComponent(k)+"="+encodeURIComponent(params[k]));
   }
   return out+values.join("&");
 }
