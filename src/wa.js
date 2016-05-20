@@ -54,7 +54,7 @@ function getPods(xml) {
   return out;
 }
 
-// Get the primary pod from XML
+// Get the primary pod from XML DOM object
 function getPrimaryPod(xml) {
   var primaryPod = xml.querySelector("[primary=true]");
   return pod2json(primaryPod);
