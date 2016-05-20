@@ -57,8 +57,28 @@ function getPods(xml) {
   return out;
 }
 
-// Get the primary pod from XML DOM object
+// Get the primary pod from XML DOM object. In the case of multiple primary pods,
+// try to return the more parseable of the two.
 function getPrimaryPod(xml) {
-  var primaryPod = xml.querySelector("[primary=true]");
+  var primaryPods = xml.querySelectorAll("[primary=true]");
+  console.log(primaryPods);
+  var primaryPod;
+  if (primaryPods.length === 1) {
+    primaryPod = primaryPods[0];
+  } else {
+    console.log("sort");
+    // Attempt to resolve multiple "primary pods" by specifying scanner precedence
+    var pods = Array.prototype.slice.call(primaryPods);
+
+    primaryPod = sortByPrecedence(
+      Array.prototype.slice.call(primaryPods),
+      [
+        "Numeric", // Most likely to be parseable
+        "Reduce",
+        "Simplification"
+      ],
+      function(p){return p.getAttribute("scanner");}
+    )[0];
+  }
   return pod2json(primaryPod);
 }
