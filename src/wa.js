@@ -3,10 +3,19 @@
 
 // API REQUEST FUNCTION
 
-// Make a Wolfram|Alpha API call given the path to request.php, a query, and an
-// API key. endpoint should point to a local, running copy of `request.php` in
-// order to get around same-origin.
-function getWAResult(endpoint, params, callback) {
+/*
+Make a Wolfram|Alpha API call given a `params` object, which should contain:
+  appid: your API
+  input: your Wolfram|Alpha API input
+  endpoint: a URL to a served copy of `request.php` (in order to circumvent same-origin)
+  callback: a callback to be run after the request is finished
+
+Any additional data in `params` will be passed to the Wolfram|Alpha API, but is not required
+*/
+function getWAResult(params) {
+  // Extract the data that won't be passed to constructParams
+  var callback = params.callback || function(){};  delete params.callback;
+  var endpoint = params.endpoint;                  delete params.endpoint;
   // Make some assumptions if data is missing
   if (params.format === undefined) {params.format = "plaintext,";} // Only return plaintext results
   if (params.scanner === undefined) {params.scanner = "Numeric,Reduce,Simplification";} // Only return math stuff
