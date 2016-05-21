@@ -81,9 +81,13 @@ function getPrimaryPod(xml) {
   return pod2json(primaryPod);
 }
 
-// Get plaintext for the primary pod and TODO: try to parse into a good format
+// Get plaintext for the primary pod and try to parse into a good format
 function getResult(xml) {
   var primarypod = getPrimaryPod(xml);
   var text = primarypod.subpods[0];
+  // Strip trailing ellipsis
+  if (encodeURIComponent(text[text.length-1]) === "%E2%80%A6") {
+    text = text.slice(0, text.length-1);
+  }
   return text;
 }
