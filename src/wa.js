@@ -28,6 +28,16 @@ function getWAResult(params) {
 
 // RESPONSE PARSING FUNCTIONS
 
+// Try to make Wolfram|Alpha's <plaintext> elements more bearable
+function processText(text) {
+    // Replace the strange unicode character they use for an equals sign with a normal one
+    text = text.replace(/\uf7d9/g, "=");
+    // Remove spaces (they're never necessary, I don't think)
+    text = text.replace(/\s/g, "");
+
+    return text;
+}
+
 // Convert XML for a pod to a JSON representation
 function pod2json(pod) {
   var out = { // Will be returned
@@ -37,7 +47,9 @@ function pod2json(pod) {
   // Build the list of subpods
   var subpod_texts = pod.getElementsByTagName("plaintext");
   for (var s=0; s < subpod_texts.length; s++) {
-    out.subpods.push(subpod_texts[s].textContent);
+    out.subpods.push(
+      processText(subpod_texts[s].textContent)
+    );
   }
   // Include all other attributes
   var attr;
@@ -95,11 +107,6 @@ function getResult(xml) {
   var primarypod = getPrimaryPod(xml);
   var text = primarypod.subpods[0];
   var scanner = primarypod.attributes.scanner;
-
-  // Replace the strange unicode character they use for an equals sign with a normal one
-  text = text.replace(/\uf7d9/g, "=");
-  // Remove spaces (they're never necessary, I don't think)
-  text = text.replace(/\s/g, "");
 
   // Numeric scanner. Result is a simple number, queries such as "pi" or "square root of 4"
   if (scanner === "Numeric") {
