@@ -89,5 +89,5 @@ function getResult(xml) {
   if (encodeURIComponent(text[text.length-1]) === "%E2%80%A6") {
     text = text.slice(0, text.length-1);
   }
-  return text;
+  return parseFloat(text);
 }
