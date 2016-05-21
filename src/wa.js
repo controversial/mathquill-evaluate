@@ -8,7 +8,7 @@
 // order to get around same-origin.
 function getWAResult(endpoint, params, callback) {
   // Make some assumptions if data is missing
-  if (params.format === undefined) {params.format = "plaintext";} // Only return plaintext results
+  if (params.format === undefined) {params.format = "plaintext,";} // Only return plaintext results
   if (params.scanner === undefined) {params.scanner = "Numeric,Reduce,Simplification";} // Only return math stuff
   var url = constructParams(endpoint, params);
   requestPage(url, function(data) {
@@ -62,10 +62,9 @@ function getPods(xml) {
 function getPrimaryPod(xml) {
   var primaryPods = xml.querySelectorAll("[primary=true]");
   var primaryPod;
-  if (primaryPods.length === 1) {
+  if (primaryPods.length === 1) { // Only pod is labelled as "primary"
     primaryPod = primaryPods[0];
-  } else {
-    // Attempt to resolve multiple "primary pods" by specifying scanner precedence
+  } else { // Attempt to resolve multiple "primary pods" by specifying scanner precedence
     var pods = Array.prototype.slice.call(primaryPods);
 
     primaryPod = sortByPrecedence(
@@ -83,11 +82,35 @@ function getPrimaryPod(xml) {
 
 // Get plaintext for the primary pod and try to parse into a good format
 function getResult(xml) {
+  // Basic data
   var primarypod = getPrimaryPod(xml);
   var text = primarypod.subpods[0];
-  // Strip trailing ellipsis
-  if (encodeURIComponent(text[text.length-1]) === "%E2%80%A6") {
-    text = text.slice(0, text.length-1);
+  var scanner = primarypod.attributes.scanner;
+
+  // Replace the strange unicode character they use for an equals sign with a normal one
+  text = text.replace(/\uf7d9/g, "=");
+  // Remove spaces (they're never necessary, I don't think)
+  text = text.replace(/\s/g, "");
+
+  // Numeric scanner. Result is a simple number, queries such as "pi" or "square root of 4"
+  if (scanner === "Numeric") {
+    // Strip trailing ellipsis
+    if (text.charCodeAt(text.length-1) === 8230) {
+      text = text.slice(0, text.length-1);
+    }
+    return parseFloat(text);
   }
-  return parseFloat(text);
+
+  // Scanner for solving an expression, like "3y=3x+4" -> "y=3x+4/3"
+  if (scanner === "Reduce") {
+    // This might have something later
+  }
+
+  // I'm not sure what this is for.
+  if (scanner === "Simplification") {
+    // This also might have something later
+  }
+
+  return text;
+
 }
