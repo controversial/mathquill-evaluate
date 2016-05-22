@@ -1,10 +1,49 @@
+body {
+  padding: 0 20%;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font: 1.5em/1.2 Symbola, serif;
+  font-size: 4em;
+  font-weight: 400;
+  margin: 0.5em 0 0;
+  text-align: center;
+}
+
+h2 {
+  font: 200 1.1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+hr {
+  border: 1px solid #ccc;
+  margin: 30px -15% 40px; /* Wider than the padding would normally allow */
+}
+
+a {
+  color: #5a5;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.morespace {
+  margin-top: 50px;
+}
+/* MathField with button next to it */
 #container {
   display: flex;
   align-items: stretch;
 }
+
 #math-field {
   flex-grow: 1;
 }
+
 #evalButton {
   border: 1px solid gray;
   height: 24px;

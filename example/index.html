@@ -10,11 +10,35 @@
 
 <body>
 
-  <h1> MathQuill-Evaluate</h1>
-  <p>
-    Evaluate MathQuill MathFields via the Wolfram|Alpha API
-  </p>
+  <h1> MathQuill Evaluate </h1>
+  <h2> Evaluate MathQuill MathFields via the Wolfram|Alpha API </h2>
+  <hr class="big"/>
 
+  <p>
+    MathQuill-Evaluate builds on MathQuill, and gives you basic
+    capabilities for evaluating the expressions that users enter into your
+    MathFields. Just pass your MathField as an argument to the evaluate function,
+    and get a solution back.
+  </p>
+  <p>
+    MathQuill-Evaluate does this by passing the LaTeX from your MathField to
+    <a href="http://wolframalpha.com/">Wolfram|Alpha</a>. Wolfram|Alpha has the
+    ability to evaluate arbitrary LaTeX and return either a simplified expression
+    or a solution.
+  </p>
+  <p>
+    The Wolfram|Alpha API is just <i>awful</i>, but I managed to make it cooperate
+    a little bit. However, this isn't the stablest of projects right now. If you're
+    trying to evaluate anything seriously, I'd recommend building your own, more
+    robust solution, but this will work in many trivial cases.
+  </p>
+  <h1>Try it</h1>
+  <hr />
+  <p>
+    This is a live example. This example displays LaTeX as you type, and then
+    when you press "Evaluate", that LaTeX is sent to Wolfram|Alpha. After a few
+    seconds, you should see a response.
+  </p>
   <div id="container">
     <span id="math-field"></span>
     <button id="evalButton" type="button">Evaluate!</button>
