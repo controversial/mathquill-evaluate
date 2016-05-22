@@ -27,3 +27,17 @@ To run the example, first change the file at `example/api-key.js`, replacing
 Making sure you've already done an `npm install`, run `npm test -s` to build
 `mathquill-evaluate` and start the server. Navigate to the `example/index.html`
 file in your browser.
+
+## Security
+If you want to keep your API key safe, you need to omit the `appid` parameter
+from the options passed to `evaluate`. Then, so that you can still access the
+API, you can modify `request.php` to automatically add the API key like so:
+
+```php
+<?php
+header("Content-Type: application/xml");
+$query = $_SERVER["QUERY_STRING"];
+$url2 = "http://api.wolframalpha.com/v2/query?".$query."&appid=YOUR_API_KEY_HERE";
+echo file_get_contents($url2);
+?>
+```
