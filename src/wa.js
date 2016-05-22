@@ -17,11 +17,15 @@ function getWAResult(params) {
   var callback = params.callback || function(){};  delete params.callback;
   var endpoint = params.endpoint;                  delete params.endpoint;
   // Make some assumptions if data is missing
-  if (params.format === undefined) {params.format = "plaintext,";} // Only return plaintext results
+  if (params.format === undefined) {params.format = "plaintext";} // Only return plaintext results
   if (params.scanner === undefined) {params.scanner = "Numeric,Reduce,Simplification";} // Only return math stuff
   var url = constructParams(endpoint, params);
   requestPage(url, function(data) {
-    callback(xmlParse(data));
+    var d = xmlParse(data);
+    if (d.getElementsByTagName("queryresult")[0].getAttribute("error") === "true") {
+      throw d.getElementsByTagName("msg")[0].textContent;
+    }
+    callback(d);
   });
 }
 
