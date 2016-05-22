@@ -1,6 +1,5 @@
 // Try to evaluate the content of a MathField
 function evaluate (mathfield, config) {
-  console.log(mathfield);
   // Set input to MathField's LaTeX
   config.input = mathfield.latex();
   // Default endpoint is powered by http://crossorigin.me/. This could very

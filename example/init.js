@@ -16,8 +16,6 @@ $(document).ready(function() {
 
 // Register click event for button
 $("#evalButton").click(function() {
-
-  console.log("clicked");
   evaluate(mathfield, {
     endpoint: "http://localhost:8080/example/request.php",
     appid: "***REMOVED***",
