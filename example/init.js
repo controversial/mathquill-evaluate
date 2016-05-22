@@ -18,7 +18,7 @@ $(document).ready(function() {
 $("#evalButton").click(function() {
   evaluate(mathfield, {
     endpoint: "http://localhost:8080/example/request.php",
-    appid: "***REMOVED***",
+    appid: API_KEY,
     callback: function(data){
       alert(data);
     }
