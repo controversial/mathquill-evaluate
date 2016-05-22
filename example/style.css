@@ -2,18 +2,18 @@ body {
   padding: 0 20%;
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.1em;
 }
 
 h1 {
-  font: 1.5em/1.2 Symbola, serif;
-  font-size: 4em;
+  font: 4em/1.2 Symbola, serif;
   font-weight: 400;
   margin: 0.5em 0 0;
   text-align: center;
 }
 
 h2 {
-  font: 200 1.1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 200 1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
 }
 
@@ -51,4 +51,20 @@ code {
   height: 24px;
   background-color: #fff;
   border-radius: 0;
+}
+
+@media (min-width: 1000px) { /* Compress a bit more on very large screens */
+  body {
+    padding: 0 25%;
+  }
+}
+
+@media (max-width: 600px) { /* Small screens */
+  body {
+    font-size: 1em;
+    padding: 0 10%;
+  }
+  h1 {
+    font-size: 3em;
+  }
 }
