@@ -31,9 +31,11 @@ a:hover {
   text-decoration: underline;
 }
 
-.morespace {
-  margin-top: 50px;
+code {
+  font-size: 120%;
+  background-color: #eaeaea;
 }
+
 /* MathField with button next to it */
 #container {
   display: flex;

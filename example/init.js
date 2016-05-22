@@ -3,7 +3,7 @@ var mathfield;
 var mq = MathQuill.getInterface(2);
 
 function onEdit() {
-  document.getElementById("output").innerHTML = "Latex: "+mathfield.latex();
+  document.getElementById("output").innerHTML = "Latex: <code>"+mathfield.latex()+"</code>";
 }
 
 $(document).ready(function() {
