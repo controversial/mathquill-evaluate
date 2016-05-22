@@ -1,6 +1,6 @@
 {
   "name": "mathquill-evaluate",
-  "version": "0.1.0",
+  "version": "1.0",
   "description": "Evaluate MathQuill expressions through WolframAlpha's API",
   "scripts": {
     "build": "/bin/sh build.sh",
