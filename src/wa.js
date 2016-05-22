@@ -30,6 +30,13 @@ function getWAResult(params) {
 }
 
 
+// PREPROCESSING FUNCTIONS
+function processLatex(latex) {
+  // Remove spaces
+  latex = latex.replace(/\\\s/g, "");
+  return latex;
+}
+
 // RESPONSE PARSING FUNCTIONS
 
 // Try to make Wolfram|Alpha's <plaintext> elements more bearable
